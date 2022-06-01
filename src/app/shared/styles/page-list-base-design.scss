@@ -1,0 +1,68 @@
+.main-container {
+  margin: 1em;
+  height: 95%;
+}
+
+mat-card {
+  background-color: var(--color-title-card);
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: white;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+mat-header-cell {
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: large;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+.table-container {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  min-width: 1000px;
+}
+
+.table-header {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+mat-icon {
+  margin-right: 1ex;
+}
+
+mat-cell > span.wrap-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+
+.mat-column-actions {
+  flex: none !important;
+  width: 2% !important;
+}
+
+.then-container {
+  padding-top: 150px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.menu-icon {
+  margin-right: 10px;
+}
