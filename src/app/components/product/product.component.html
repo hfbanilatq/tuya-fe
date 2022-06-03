@@ -1,0 +1,41 @@
+<mat-card class="product-card">
+    <mat-card-header>
+        <mat-card-title fxLayout fxLayoutAlign="center center">{{product.description}}</mat-card-title>
+        <mat-card-subtitle>{{product.reference}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <div fxLayout fxLayoutAlign="center center" class="size-100" >
+        <img mat-card-image class="card-image" src="{{product.imageUrl}}" alt="Tuya Icon">
+    </div>
+    <mat-card-content fxLayout="column">
+        <div class="root-container">
+            <section>
+                <div class="section-container">
+                    <div class="section-content">
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Precio Original:</span>
+                            <span class="content-information"> {{product.price | currency}}
+                            </span>
+                        </p>
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Precio en descuento:</span>
+                            <span class="ontent-information"> {{product.priceWithAllPayments | currency}}</span>
+                        </p>
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Precio con tarjeta:</span>
+                            <span class="ontent-information"> {{product.priceWithCreditCard | currency}}</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <button *ngIf="!added" type="button" (click)="onAdd()" mat-raised-button color="accent"
+            style="margin-top: 2%;">
+            Añadir
+        </button>
+        <button *ngIf="added" type="button" (click)="onRemove()" mat-raised-button color="primary" style="margin-top: 2%;">
+            Remover
+        </button>
+    </mat-card-content>
+</mat-card>

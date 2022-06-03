@@ -1,0 +1,44 @@
+@import "/src/app/shared/styles/common-tab-style";
+
+  
+  mat-card-title {
+    color: var(--color-primary);
+  }
+  
+  .left-img {
+    height: 100%;
+    background-color: var(--color-primary);
+    padding: 90px;
+    max-width: 70%;
+    border-radius: 1%;
+  }
+  
+  .product-card {
+    width: 230px;
+    height: 360px;
+  }
+
+  
+  .card-image {
+    height: 90px;
+    width: auto;
+  }
+
+
+
+  .mat-card-header {
+      min-height: 110px;
+  }
+  
+
+  .mat-card-title {
+      font-size: small;
+  }
+
+  
+  .mat-card-subtitle {
+    font-size: smaller;
+}
+  
+  
+  

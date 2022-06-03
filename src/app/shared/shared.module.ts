@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { MaterialModule } from '@material/material.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +18,17 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     SidenavComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    FontAwesomeModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule,
+    RouterModule
+  ],
+  exports: [
+    FooterComponent,
+    HeaderComponent,
+    SidenavComponent
   ]
 })
 export class SharedModule { }

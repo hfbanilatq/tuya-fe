@@ -1,5 +1,5 @@
 .root-container {
-  min-width: 400px;
+  min-width: 240px;
   width: 100%;
 }
 
@@ -22,29 +22,29 @@
 }
 
 .section-content {
-  width: 90%;
   margin-left: auto;
   margin-right: auto;
-  min-width: 400px;
+  min-width: 200px;
 }
 
 .row-paragraph {
-  width: 50%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   float: left;
   display: inline-flex;
+  font-size: smaller;
 }
 
 .subtitle {
-  font-size: medium;
+  font-size: small;
   font-weight: bold;
-  width: 45%;
+  width: 60%;
   overflow-wrap: break-word;
 }
 
 .content-information {
   max-width: 55%;
   overflow-wrap: break-word;
-  margin-right: 10px;
+  margin-right: 5px;
 }

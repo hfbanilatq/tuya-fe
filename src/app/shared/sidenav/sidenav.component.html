@@ -1,1 +1,35 @@
-<p>sidenav works!</p>
+<div class="sidenav_container" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+    <div fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
+  
+  
+      <ng-container *ngIf="linkText; else elseTemplate">
+        <img class="normal-logo" alt="normal logo" src="https://www.tuya.com.co/sites/all/themes/tuya/assets/images/pre-home/logo_tuya.svg">
+      </ng-container>
+      <ng-template #elseTemplate>
+        <img class="minus-logo" alt="minus logo" src="https://www.tuya.com.co/sites/all/themes/tuya/assets/images/pre-home/logo_tuya.svg">
+      </ng-template>
+      <mat-divider></mat-divider>
+  
+      <span class="spacer"></span>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <button mat-icon-button (click)="onSidenavToggle($event)" style="margin-left: 25px;">
+  
+          <span *ngIf="linkText">Contraer </span>
+          <fa-icon *ngIf="sideNavState" [icon]="faArrowLeft"></fa-icon>
+          <fa-icon *ngIf="!sideNavState" [icon]="faArrowRight"></fa-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let navItem of navItems" [routerLink]="['/' + navItem.link]"
+                       [matTooltip]="navItem.name" matTooltipClass="sidenav-tooltip" matTooltipPosition="right"
+                       [matTooltipDisabled]="linkText"
+                       routerLinkActive="router-link-active">
+          <fa-icon matSuffix [icon]="navItem?.icon" size="lg">
+          </fa-icon>
+          <span *ngIf="linkText">{{ navItem?.name }} </span>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+  </div>
+  

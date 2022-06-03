@@ -1,1 +1,30 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+    <button mat-fab id="menu" (click)="sidenav?.toggle()" aria-label="icon-button with menu icon">
+        <fa-icon [icon]="faBars" size="2x"></fa-icon>
+    </button>
+    <div fxLayout fxLayoutAlign="center center" class="size-100">
+        <span>Simulador de compras</span>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <ul fxLayout="row" fxLayoutGap="2px">
+            <li>
+                <button mat-fab [matMenuTriggerFor]="afterMenu">
+                    <fa-icon [icon]="faUserCircle" size="2x"></fa-icon>
+                </button>
+                <mat-menu #afterMenu="matMenu" xPosition="after">
+                    <button *ngIf="!isLoggedIn" routerLink="/login" mat-menu-item>
+
+                        <fa-icon [icon]="faSignInAlt" size="1x"></fa-icon>
+                        Iniciar Sesión
+                    </button>
+                    <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>
+
+                        <fa-icon [icon]="faSignOutAlt" size="1x"></fa-icon>
+                        Cerrar Sesión
+                    </button>
+                </mat-menu>
+            </li>
+        </ul>
+    </div>
+</mat-toolbar>
+<mat-divider></mat-divider>

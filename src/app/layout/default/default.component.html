@@ -1,0 +1,11 @@
+<app-header [sidenav]="sidenav"></app-header>
+
+<mat-drawer-container color="primary">
+  <mat-drawer color="primary" #sidenav mode="side" opened="false" role="navigation">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content >
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+<app-footer></app-footer>

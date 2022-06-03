@@ -1,34 +1,33 @@
-::ng-deep .mat-dialog-title{
-    background-color:var(--color-primary);
-    color: white;
-    height: 60px;
-    min-width: 300px;
+::ng-deep .mat-dialog-title {
+  background-color: var(--color-accent);
+  color: white;
+  height: 60px;
+  min-width: 300px;
 }
-::ng-deep  .mat-dialog-container{
-    padding: 3px !important;
+::ng-deep .mat-dialog-container {
+  padding: 3px !important;
 }
 // ::ng-deep  .mat-button{
 //     background-color:var(--color-primary);
 //     color: white;
 // }
-.dialog-container{
-    padding: 21px;
+.dialog-container {
+  padding: 21px;
 }
 mat-form-field {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
-form{
-margin-left:2%;
+form {
+  margin-left: 2%;
 }
 
 .container-fluid {
-
-width: 100%;
+  width: 100%;
 }
 
-.textarea{
-    margin: 5px;
+.textarea {
+  margin: 5px;
 }
 
 .spinner-container {
@@ -44,7 +43,6 @@ width: 100%;
   padding: 10px;
 }
 
-
 .close-icon {
   transition: 1s ease-in-out;
 }
@@ -53,12 +51,12 @@ width: 100%;
   transform: rotate(180deg);
 }
 
-::ng-deep .icon-outside .close-button{
+::ng-deep .icon-outside .close-button {
   float: right;
-  top:-52px;
-  right:-52px;
+  top: -52px;
+  right: -52px;
 }
 
 ::ng-deep .icon-outside .mat-dialog-container {
-  overflow: unset
+  overflow: unset;
 }

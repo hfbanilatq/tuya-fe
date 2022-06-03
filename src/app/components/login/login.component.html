@@ -1,0 +1,43 @@
+<div class="login-container" fxLayout fxLayoutAlign="center center">
+  <div class="login-flex" fxLayout="row" fxLayoutAlign="center">
+    <mat-card>
+      <mat-card-title fxLayout fxLayoutAlign="center center"> Iniciar Sesión</mat-card-title>
+      <div fxLayout fxLayoutAlign="center center" class="size/100" style="margin-top: 10%;">
+        <img mat-card-image class="minus-logo" src="https://www.tuya.com.co/sites/all/themes/tuya/assets/images/pre-home/logo_tuya.svg" alt="Tuya Icon">
+      </div>
+      
+      <mat-card-content fxLayout="column">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" fxLayout="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select formControlName="documentType">
+              <mat-option *ngFor="let documentType of documentTypes" value="{{documentType.id}}">{{documentType.documentType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Numero de documento</mat-label>
+            <input matInput type="number" formControlName="username" minlength="6" maxlength="12">
+            <button mat-icon-button matSuffix>
+              <fa-icon [icon]="faUser"></fa-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="passHide ? 'password' : 'text'" formControlName="password" maxlength="4">
+            <button type="button" mat-icon-button matSuffix (click)="passHide = !passHide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="passHide">
+              <fa-icon [icon]="passHide ? faEyeSlash : faEye"></fa-icon>
+            </button>
+          </mat-form-field>
+          <button mat-raised-button color="primary" fxLayoutAlign="center" [disabled]="loginForm.invalid" type="submit">
+            Login
+          </button>
+        </form>
+
+        <button type="button" routerLink="/" mat-raised-button color="accent" style="margin-top: 10%;">
+          Inicio
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

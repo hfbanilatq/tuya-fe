@@ -1,0 +1,17 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  ul li {
+    list-style: none;
+  }
+  
+  mat-divider {
+    border-top-color: var(--color-accent);
+  }
+  
+  .mat-fab {
+    color: var(--color-primary) !important;
+    background: transparent !important;
+  }
+  

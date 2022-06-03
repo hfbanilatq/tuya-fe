@@ -1,0 +1,68 @@
+<div class="no-scroll">
+    <div class="stepper-container">
+
+        <mat-stepper orientation="vertical">
+            <mat-step>
+                <ng-template matStepLabel>Paso 1: añadir productos</ng-template>
+                <ng-template matStepContent>
+                    <div class="size-100">
+                        <mat-form-field class="size-100">
+                            <mat-label>Busqueda</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="Filtro">
+                        </mat-form-field>
+                    </div>
+                    <div class="size-100 product-wrapper">
+                        <div *ngFor="let product of filteredProducts" class="product-container">
+                            <app-product [product]="product" (add)="onAdd($event)" (remove)="onRemove($event)"
+                                [added]="checkSelection(product)"></app-product>
+                        </div>
+                    </div>
+
+                    <div class="size-100">
+                        <div fxLayoutAlign="end" fxLayoutGap="10px" style="margin-top: 5px;">
+                            <button color="primary" type="button" mat-raised-button matStepperNext>Siguiente</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Paso 2: Seleccionar tarjeta y numero de cuotas</ng-template>
+                <ng-template matStepContent>
+                    <div class="form-container">
+
+                        <form fxLayout="row wrap" fxLayoutGap="20px" fxLayoutGap.xs="5px" [formGroup]="simulationForm">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Seleccionar tarjeta</mat-label>
+                                <mat-select formControlName="creditCard">
+                                    <mat-option *ngFor="let creditCard of creditCards" value="{{creditCard.id}}">
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">{{creditCard.type}}
+                                            <img src="{{creditCard.imageUrl}}" class="select-icon" /></div>
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="simulationForm.controls.creditCard.hasError('required')">
+                                    Debe seleccionar la tarjeta
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="size-100">
+                                <label class="example-name-label">Numero de cuotas:
+                                    {{simulationForm.value.feeNumber}}</label>
+                            </div>
+                            <mat-slider class="example-margin" [max]="48" [min]="2" [step]="1" [thumbLabel]="true"
+                                aria-labelledby="slider-fee" formControlName="feeNumber">
+                            </mat-slider>
+                        </form>
+                    </div>
+
+                    <div class="size-100">
+                        <div fxLayoutAlign="end" fxLayoutGap="10px">
+                            <button color="primary" type="button" mat-raised-button matStepperPrevious>Atrás</button>
+                            <button color="primary" type="button" mat-raised-button
+                                (click)="simulate()">Simular</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </mat-step>
+        </mat-stepper>
+    </div>
+</div>

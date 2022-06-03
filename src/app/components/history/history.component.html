@@ -1,0 +1,56 @@
+<div class="table-container">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="creditCard">
+            <th mat-header-cell *matHeaderCellDef> Tarjeta de crédito </th>
+            <td mat-cell *matCellDef="let element"> {{element.creditCardName }} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="numberOfProducts">
+            <th mat-header-cell *matHeaderCellDef> Cantidad de productos </th>
+            <td mat-cell *matCellDef="let element"> {{element.products.length }} </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="numberOfInstallments">
+            <th mat-header-cell *matHeaderCellDef> Numero de cuotas </th>
+            <td mat-cell *matCellDef="let element"> {{element.numberOfInstallments}} </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd/MM/YYYY h:mm:ss'}} </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Ver </th>
+            <td mat-cell *matCellDef="let element"> <button mat-icon-button color="primary" (click)="openDetail(element)" aria-label="See result">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button> </td>
+        </ng-container>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No se encontraron simulaciones en base de datos</td>
+        </tr>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

@@ -1,0 +1,162 @@
+<div class="root-container">
+    <section>
+        <div class="section-container">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Detalles de la simulación
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="accordion-content">
+                        <p class="row-image">
+                            <span class="image-span">
+
+                                <img class="card-image" src="{{usedCreditCard?.imageUrl}}" />
+                            </span>
+                        </p>
+                        
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Tarjeta usada:</span>
+                            <span class="ontent-information">  {{usedCreditCard?.type }}</span>
+                        </p>
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Interes mensual:</span>
+                            <span class="ontent-information"> {{usedCreditCard?.monthlyInterest}}</span>
+                        </p>
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Interes efectivo anual:</span>
+                            <span class="ontent-information"> {{usedCreditCard?.effectiveAnnualInterest }}</span>
+                        </p>
+                        <p class="row-paragraph">
+                            <span class="subtitle"> Productos añadidos:</span>
+                            <span class="ontent-information"> {{simulation?.products.length }}</span>
+                        </p>
+                        
+                        <p class="row-paragraph">
+                            <span class="subtitle">Numero de cuotas:</span>
+                            <span class="ontent-information"> {{simulation?.numberOfInstallments }}</span>
+                        </p>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </section>
+    <section>
+        <div class="section-container">
+            <div class="section-title">
+                Resultado simulación
+            </div>
+            <div class="section-content">
+                <p class="row-paragraph">
+                    <span class="subtitle"> Valor de la compra sin descuentos:</span>
+                    <span class="content-information"> {{result.realPrice | currency}}
+                    </span>
+                </p>
+                <p class="row-paragraph">
+                    <span class="subtitle"> Valor con cualquier medio de pago:</span>
+                    <span class="ontent-information"> {{result.promotionPrice | currency}}</span>
+                </p>
+                <p class="row-paragraph">
+                    <span class="subtitle"> Valor con la tarjeta:</span>
+                    <span class="ontent-information"> {{result.priceWithCreditCard | currency}}</span>
+                </p>
+                <p class="row-paragraph">
+                    <span class="subtitle"> Valor real pagado (Intereses + Cuota de manejo)</span>
+                    <span class="ontent-information"> {{result.pricePaid | currency}}</span>
+                </p>
+
+
+                <div *ngIf="result.pricePaid > result.promotionPrice">
+                    Realizarás un pago de {{result.pricePaid - result.promotionPrice | currency }} mayor si realizas
+                    esta compra con tarjeta en comparación
+                    con cualquier otro medio de pago
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="table-container">
+    <h2 style="margin-bottom: 20px;"> Detalle de las cuotas</h2>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="feeNumber">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.feeNumber}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="feeValue">
+            <th mat-header-cell *matHeaderCellDef> Valor cuota (Capital + Intereses + Cuota de manejo) </th>
+            <td mat-cell *matCellDef="let element"> {{element.feeValue | currency}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef> Balance </th>
+            <td mat-cell *matCellDef="let element"> {{element.balance | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <div class="size-100" style="margin-top: 5%;">
+        <div fxLayoutAlign="end" fxLayoutGap="10px">
+            <button color="primary" type="button" mat-raised-button (click)="goToSimulator()">Nueva simulación</button>
+            <button *ngIf="isLoggedIn && !simulation?.id" color="primary" type="button" mat-raised-button
+                (click)="save()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <footer class="footer-landing"><small><span style="font-size:11.0pt"><span style="font-family:Calibri"><span
+                        style="font-weight:bold">*Los resultados de esta simulación son informativos, aproximados y
+                        no
+                        implican oferta o promesa de contratar.</span>&nbsp;&nbsp;<span
+                        style="font-weight:bold">*</span>Los valores presentados resultan de una proyección de los
+                    cobros inherentes o asociados a la operación en los términos de ley y no necesariamente
+                    corresponden
+                    a los montos que efectivamente pagará el cliente.&nbsp;&nbsp;<span style="font-weight:bold">*Los
+                        valores podrán variar de acuerdo a las políticas de estudio y aprobación de crédito por
+                        parte de
+                        Tuya S.A.</span>&nbsp;&nbsp;<span style="font-weight:bold">*</span>Para <span
+                        style="font-style:italic"><ins>CrediCompras</ins></span> los intereses se liquidarán con la
+                    tasa
+                    vigente pactada con el cliente al momento del desembolso.&nbsp;&nbsp;<span
+                        style="font-weight:bold">*</span>Para Tarjeta, los intereses se liquidarán con la tasa
+                    vigente
+                    al momento de la utilización.&nbsp;&nbsp;<span style="font-weight:bold">*</span>La tasa efectiva
+                    anual vigente para el mes de <strong>mayo de 2022</strong> es de <span
+                        style="font-weight:bold">29,53609% EA. La tasa de interés para disminución del valor de la
+                        cuota
+                        respecto del capital será la tasa vigente para la aplicación de alivios financieros:
+                        29,53609%</span><span style="font-size:11.0pt"><span style="font-family:Calibri"><span
+                                style="font-weight:bold"> *</span>Póliza colectiva Seguro Deudores para créditos
+                            desembolsados hasta 31 de marzo de 2019: <span style="font-weight:bold">$3.159</span>
+                            por
+                            millón desembolsado.&nbsp;&nbsp;<span style="font-weight:bold">*</span>Póliza colectiva
+                            Seguro Deudores para créditos desembolsados a partir del 1 de abril de 2019: <span
+                                style="font-weight:bold">$3.143</span> por millón sobre el saldo
+                            adeudado.&nbsp;&nbsp;*<span style="font-weight:bold">Los valores presentados en esta
+                                simulación solo estarán vigentes en la fecha en la que se realice la simulación en
+                                el
+                                sitio web de Tuya S.A.&nbsp; *</span>Aprobación sujeta a análisis de riesgo.<span
+                                style="font-style:italic"><ins>Tarjeta Éxito,Tarjetas Éxito MasterCard, Tarjetas
+                                    Carulla
+                                    MasterCard y CrediCompras, emitidos y otorgados por Tuya S.A</ins></span>.&nbsp;
+                            &nbsp;<span style="font-weight:bold">*</span>El valor proyecto para tarjetas no incluye
+                            cuota de manejo ni cargos fijos.&nbsp;&nbsp;<span style="font-weight:bold">*Los valores
+                                proyectados solo incluyen la presente simulación y no compras
+                                anteriores.</span>&nbsp;&nbsp;<span style="font-weight:bold">*</span>Avances y
+                            compras
+                            internacionales realizados con <span style="font-style:italic"><ins>Tarjetas Éxito
+                                    MasterCard y/o Tarjetas Carulla MasterCard</ins></span> se difieren a 24
+                            meses.</span></span></span></span></small></footer>
+</div>
